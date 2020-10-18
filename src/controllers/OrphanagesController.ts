@@ -4,6 +4,8 @@ import Orphanage from '../models/Orphanage'
 import orphanageView from '../views/orphanages_view'
 import * as Yup from 'yup'
 
+import getIP from '../errors/getIP'
+
 export default {
   async create(request: Request, response: Response) {
     const {
@@ -81,5 +83,11 @@ export default {
     });
 
     return response.json(orphanageView.render(orphanage));
+  },
+
+  async ip(request: Request, response: Response){
+    const ipList = await getIP();
+
+    return response.json(ipList)
   }
 }
